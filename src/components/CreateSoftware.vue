@@ -51,6 +51,7 @@
 
 <script>
 import axios from "axios";
+const host  = "http://sohanapp.azurewebsites.net";   //localhost:7071
 
 export default {
     name : "Create_Software",
@@ -70,20 +71,18 @@ export default {
           dod : '',
           dop : '',
           estfund :''
-         },
-
+         }
         }
     },
     methods: {
       async onSubmit(e){
- 
-                // e.preventDefault()
+
                 if(!this.form.fname){
-                    alert('Please Add a First Name'+ e.target.length)
+                    alert('Please Add a First Name'+ e.target.length + host)
                     return
                 }
-
-               const response = await axios.post("http://localhost:7071/api/HttpTrigger1", {form : this.form });
+              
+               const response = await axios.post(host +"/api/HttpTrigger1", {form : this.form });
                 this.articleId = response.data.id;
  
             },
