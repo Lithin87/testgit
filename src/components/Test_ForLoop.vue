@@ -25,6 +25,9 @@
 
 <script>
 import axios from "axios";
+const host  = "http://sohanapp.azurewebsites.net";  
+// const host  = "http://localhost:7071"; 
+
 
 export default {
   name: "Test_ForLoop",
@@ -38,7 +41,7 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get( "http://localhost:7071/api/HttpTrigger1" );
+      const response = await axios.get(host+ "/api/HttpTrigger1" );
       this.todos = response.data;
     } catch (e) {
       this.errors.push(e);
