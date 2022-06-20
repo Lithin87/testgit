@@ -51,8 +51,8 @@
 
 <script>
 import axios from "axios";
-const host  = "https://sohanapp.azurewebsites.net";   //localhost:7071
-
+const host  = "http://sohanapp.azurewebsites.net";  
+// const host  = "http://localhost:7071";   
 export default {
     name : "Create_Software",
   data() {
