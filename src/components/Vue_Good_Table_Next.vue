@@ -6,13 +6,14 @@
         This will show up on the bottom of the table.
       </template> -->
     <!-- </vue-good-table> -->
+    <p>hii {{this.rows}} hii</p>
   </div>
   {{ errors }}
 </template>
 
 <script>
 import axios from "axios";
-const host  = "http://sohanapp.azurewebsites.net";  
+// const host  = "https://sohanapp.azurewebsites.net";  
 // const host  = "http://localhost:7071"; 
 
 
@@ -26,17 +27,31 @@ export default {
           field: "id",
         },
         {
-          label: "NAME",
-          field: "name",
+          label: "FNAME",
+          field: "form.fname",
         },
         {
-          label: "COMPANY",
-          field: "company",
+          label: "LNAME",
+          field: "form.lname",
         },
         {
-          label: "AGE",
-          field: "age",
-          type: "number",
+          label: "DEVICE",
+          field: "form.device"
+        },
+        {
+          label: "DateOfDrop",
+          field: "form.dod",
+          // type: "date",
+        },
+        {
+          label: "DateOfPick",
+          field: "form.dop",
+          // type: "date",
+        },
+        {
+          label: "Est Fund",
+          field: "form.estfund",
+          type: "nunmber",
         },
         {
           label: "Created On",
@@ -52,9 +67,8 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get(host+ "/api/HttpTrigger1"
-      );
-      this.rows = response.data;
+      const response = await axios.get("http://sohanapp.azurewebsites.net/api/HttpTrigger1");
+      this.rows = response;
     } catch (e) {
       this.errors.push(e);
     }

@@ -4,15 +4,15 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>NAME</th>
-          <th>COMPANY</th>
+          <th>FNAME</th>
+          <th>LNAME</th>
           <th>AGE</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="todo in todos" :key="todo.id">
-          <td>{{ todo.id }}</td>
-          <td>{{ todo.name }}</td>
+          <td>{{ todo.fname }}</td>
+          <td>{{ todo.lname }}</td>
           <td>{{ todo.company }}</td>
           <td>{{ todo.age }}</td>
         </tr>
