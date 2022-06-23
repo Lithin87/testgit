@@ -51,8 +51,18 @@
 
 <script>
 import axios from "axios";
+// var https = require('https');
 const host  = "http://sohanapp.azurewebsites.net";  
 // const host  = "http://localhost:7071";   
+
+    // var optionsget = {
+    //     host : 'sohanapp.azurewebsites.net', 
+    //     port : 443,
+    //     path : '/api/HttpTrigger1',
+    //     method : 'GET' 
+    // };
+    
+    
 export default {
     name : "Create_Software",
   data() {
@@ -81,6 +91,24 @@ export default {
                     alert('Please Add a First Name'+ e.target.length + host)
                     return
                 }
+
+    //           var reqGet = https.request(optionsget, function(res1) {
+    //     console.log("statusCode: ", res1.statusCode);
+    
+    //     res1.on('data', function(d) {
+    //         console.info('GET result:\n');
+    //         process.stdout.write(d);
+    //         res.send(JSON.parse(d));
+    //         console.info('\n\nCall completed');
+    //     });
+    
+    // });
+    
+    // reqGet.end();
+    // reqGet.on('error', function(e) {
+    //     console.error(e);
+    // });
+
               
                const response = await axios.post(host +"/api/HttpTrigger1", {form : this.form });
                 this.articleId = response.data.id;
