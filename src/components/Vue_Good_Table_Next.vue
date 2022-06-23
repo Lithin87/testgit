@@ -18,7 +18,7 @@
 // const host  = "https://sohanapp.azurewebsites.net";  
 // const host  = "http://localhost:7071"; 
 //  var response_data;
-const host  = "http://localhost:8080";  
+const host  = "https://localhost:8080";  
 import axios from "axios";
 
 
