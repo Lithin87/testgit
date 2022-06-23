@@ -105,10 +105,9 @@ export default {
   //   });
  
 
-     const response = await axios.get(host);
+     const response = await axios.get(host,{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
       this.rows = response.data;
       
-
 
     } catch (e) {
       this.errors.push(e);
