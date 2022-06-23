@@ -14,10 +14,13 @@
 <script>
 // import axios from "axios";
 // var https = require('https');
-var http = require('http');
+// var http = require('http');
 // const host  = "https://sohanapp.azurewebsites.net";  
 // const host  = "http://localhost:7071"; 
 //  var response_data;
+const host  = "http://localhost:8080";  
+import axios from "axios";
+
 
 export default {
   name: "Vue_Good_Table_Next",
@@ -72,39 +75,41 @@ export default {
  
     try {
 
-        var optionsget = {
-        // host : 'http://function-1-kzgmyi7nmq-el.a.run.app', 
-          host : 'http://localhost:8080', 
+  //       var optionsget = {
+  //       // host : 'http://function-1-kzgmyi7nmq-el.a.run.app', 
+  //         host : 'http://localhost:8080', 
          
-        // port : 443,
-        path : '/',
-         withCredentials: false,
-        method : 'GET' 
-    };
+  //       // port : 443,
+  //       path : '/',
+  //        withCredentials: false,
+  //       method : 'GET' 
+  //   };
     
-     var reqGet = http.request(optionsget, function(res1) {
-        console.log("statusCode: ", res1.statusCode);
+  //    var reqGet = http.request(optionsget, function(res1) {
+  //       console.log("statusCode: ", res1.statusCode);
     
-        res1.on('data', function(d) {
-            console.info('GET result:\n');
-            this.rows = d;
-            // process.stdout.write(d);
+  //       res1.on('data', function(d) {
+  //           console.info('GET result:\n');
+  //           this.rows = d;
+  //           // process.stdout.write(d);
            
-            // console.info('\n\nCall completed');
-        });
+  //           // console.info('\n\nCall completed');
+  //       });
     
-    });
+  //   });
     
-    reqGet.end();
-    reqGet.on('error', function(e) {
-   this.errors.push(e);
+  //   reqGet.end();
+  //   reqGet.on('error', function(e) {
+  //  this.errors.push(e);
        
-    });
+  //   });
  
 
-    //  const response = await axios.get("https://function-1-kzgmyi7nmq-el.a.run.app");
-      // this.rows = response.data;
+     const response = await axios.get(host);
+      this.rows = response.data;
       
+
+
     } catch (e) {
       this.errors.push(e);
     }
