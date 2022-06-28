@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-var https = require('https');
+// var https = require('https');
 // var cors = require('cors')
 
 import 'vue-good-table-next/dist/vue-good-table-next.css'
@@ -15,6 +15,6 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 app.use(VueGoodTablePlugin)
 app.use(ElementPlus)
-app.use(https)
+// app.use(https)
 // app.use(cors(corsOptions))
 app.mount('#app')

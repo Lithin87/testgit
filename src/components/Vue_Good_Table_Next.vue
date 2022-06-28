@@ -1,26 +1,26 @@
 <template>
   <div>
     <vue-good-table
-      :columns="columns" :rows="rows" theme="black-rhino"/>
+      :columns="columns" :rows="rows"  max-height="300px" fixed-header="true" line-numbers="true"  :select-options="{
+    enabled: true,
+    selectOnCheckboxOnly: true, // only select when checkbox is clicked instead of the row
+    selectionInfoClass: 'custom-class',
+    selectionText: 'rows selected',
+    clearSelectionText: 'clear',
+    disableSelectInfo: true, // disable the select info panel on top
+    selectAllByGroup: true, // when used in combination with a grouped table, add a checkbox in the header row to check/uncheck the entire group
+  }" theme="black-rhino"/>
       <!-- <template #table-actions-bottom>
         This will show up on the bottom of the table.
       </template> -->
     <!-- </vue-good-table> -->
-    <p>hii {{this.rows}} hii</p>
   </div>
-  {{ errors }}
+<h1 style="color: red" :hidden="isHidden"> {{this.errors}} </h1> 
 </template>
 
 <script>
-// import axios from "axios";
-// var https = require('https');
-// var http = require('http');
-// const host  = "https://sohanapp.azurewebsites.net";  
-// const host  = "http://localhost:7071"; 
-//  var response_data;
-const host  = "http://localhost:8080";  
 import axios from "axios";
-
+const host  = "http://localhost:8080";  
 
 export default {
   name: "Vue_Good_Table_Next",
@@ -68,49 +68,19 @@ export default {
       ],
       rows: [],
       errors: [],
+      isHidden : true,
     };
   },
   async created() {
-   
- 
     try {
 
-  //       var optionsget = {
-  //       // host : 'http://function-1-kzgmyi7nmq-el.a.run.app', 
-  //         host : 'http://localhost:8080', 
-         
-  //       // port : 443,
-  //       path : '/',
-  //        withCredentials: false,
-  //       method : 'GET' 
-  //   };
-    
-  //    var reqGet = http.request(optionsget, function(res1) {
-  //       console.log("statusCode: ", res1.statusCode);
-    
-  //       res1.on('data', function(d) {
-  //           console.info('GET result:\n');
-  //           this.rows = d;
-  //           // process.stdout.write(d);
-           
-  //           // console.info('\n\nCall completed');
-  //       });
-    
-  //   });
-    
-  //   reqGet.end();
-  //   reqGet.on('error', function(e) {
-  //  this.errors.push(e);
-       
-  //   });
- 
-
      const response = await axios.get(host,{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
-      this.rows = response.data;
+      // const response1 = await axios.post(host,{form : {"dfd" : "dftghf"}},{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
+     this.rows = response.data;
       
-
     } catch (e) {
-      this.errors.push(e);
+      this.errors.push(e.message);
+       this.isHidden = false;
     }
   },
 };

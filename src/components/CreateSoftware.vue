@@ -15,7 +15,7 @@
     <img src="../assets/shop_repair1.jpg" alt="W3Schools.com" width="500" height="420" />
 
     <br /><br />
-    <button  @click=" open ='OPEN'; isDisabled = false; activeColor ='green'; formActiveColor ='blue';" style="color: green">OPEN</button>
+    <button  @click=" onSubmit1;open ='OPEN'; isDisabled = false; activeColor ='green'; formActiveColor ='blue';" style="color: green">OPEN</button>
     <button  @click=" open ='CLOSED.SEE YOU TOMORROW'; isDisabled =true; activeColor ='red'; formActiveColor = 'red';"  style="color:red">CLOSE</button>
 
     <br><br><br />
@@ -37,13 +37,13 @@
 <br><br><br><br>
 
     {{ count > 10 ? "EXCEEDED QUOTA FOR TODAY. COME TOMORROW" : "OK" }}<br />
-    TOTAL DEVICE : {{ count }} <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    TOTAL DEVICE : {{ count }} <br>
     <h1 :hidden="isHidden" style="color: blue; font-family: 'Courier New'">
 
        {{form.fname }} {{form.lname}} plans to repair {{form.device }} by dropping on DATE {{form.dod}} with 
        pick-up on {{form.dop}} with Rs {{form.estfund}}
       
-    </h1><br>
+    </h1><br> {{articleId}}
   </div>
 </template>
 
@@ -51,17 +51,7 @@
 
 <script>
 import axios from "axios";
-// var https = require('https');
-const host  = "http://sohanapp.azurewebsites.net";  
-// const host  = "http://localhost:7071";   
-
-    // var optionsget = {
-    //     host : 'sohanapp.azurewebsites.net', 
-    //     port : 443,
-    //     path : '/api/HttpTrigger1',
-    //     method : 'GET' 
-    // };
-    
+const host  = "http://localhost:8080";   
     
 export default {
     name : "Create_Software",
@@ -72,8 +62,9 @@ export default {
         activeColor : "green",
         formActiveColor : "blue",
         fontSize : 40,
-        isHidden : "hidden",
+        isHidden : true,
         isDisabled : false,
+        articleId : "gg",
         form : {
           fname : '',
           lname : '',
@@ -86,33 +77,17 @@ export default {
     },
     methods: {
       async onSubmit(e){
-
-                if(!this.form.fname){
-                    alert('Please Add a First Name'+ e.target.length + host)
+               e.preventDefault();
+                if(!this.form.fname || !this.form.device){
+                    alert('Please Add a First Name')
                     return
                 }
 
-    //           var reqGet = https.request(optionsget, function(res1) {
-    //     console.log("statusCode: ", res1.statusCode);
-    
-    //     res1.on('data', function(d) {
-    //         console.info('GET result:\n');
-    //         process.stdout.write(d);
-    //         res.send(JSON.parse(d));
-    //         console.info('\n\nCall completed');
-    //     });
-    
-    // });
-    
-    // reqGet.end();
-    // reqGet.on('error', function(e) {
-    //     console.error(e);
-    // });
+              var req_headers = { headers: { 'Access-Control-Request-Private-Network': 'true',
+                                         'Content-Type' : 'application/json'} }
+                     const response = await axios.post(host,{form : this.form },req_headers);
+                this.articleId = response.data
 
-              
-               const response = await axios.post(host +"/api/HttpTrigger1", {form : this.form });
-                this.articleId = response.data.id;
- 
             },
 
       increment() {
