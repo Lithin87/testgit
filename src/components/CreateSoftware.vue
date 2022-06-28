@@ -27,7 +27,7 @@
         REPAIR DEVICE    <input type="text" v-model="form.device" :disabled="isDisabled" /><br />
         DATE OF DROP     <input type="text" v-model="form.dod" :disabled="isDisabled" /><br />
         DATE OF PICKUP   <input type="text" v-model="form.dop" :disabled="isDisabled" /><br />
-        ESTIMATED FUND   <input type="text" v-model="form.estfund" :disabled="isDisabled" /><br />
+        ESTIMATED FUND   <input type="text" v-model="form.estfund" :disabled="isDisabled" @keypress="validateNumber"/><br />
       </font>
 
       <input  type="submit" value="SUBMIT"  @click="isHidden = false"  :disabled="isDisabled"/>
@@ -76,9 +76,20 @@ export default {
         }
     },
     methods: {
+       validateNumber: (event) => {
+      let keyCode = event.keyCode;
+      if (keyCode < 48 || keyCode > 57) {
+        event.preventDefault();
+      }
+    },
       async onSubmit(e){
                e.preventDefault();
                 if(!this.form.fname || !this.form.device){
+                    alert('Please Add a First Name')
+                    return
+                }
+
+                  if(!this.form.estfund ){
                     alert('Please Add a First Name')
                     return
                 }
