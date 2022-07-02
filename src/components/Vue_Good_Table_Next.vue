@@ -109,8 +109,8 @@ export default {
   },
   async created() {
     try {
-
-     const response = await axios.get(host,{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
+// var headerlist = { headers: { 'Access-Control-Request-Private-Network': 'true'}}
+     const response = await axios.get(host);
       // const response1 = await axios.post(host,{form : {"dfd" : "dftghf"}},{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
      this.rows = response.data;
       
