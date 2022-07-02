@@ -197,8 +197,8 @@ const input = ref('')
 
 <script>
 import axios from "axios";
-const host  = "http://localhost:8080";   
-
+// const host  = "http://localhost:8081";   
+const host  = "http://34.93.10.231:8081";  
     
 export default {
     name : "Create_Software",
