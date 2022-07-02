@@ -7,6 +7,7 @@ import 'vue-good-table-next/dist/vue-good-table-next.css'
 import VueGoodTablePlugin from 'vue-good-table-next';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import PrimeVue from 'primevue/config';
 
 // var corsOptions = {
 //     origin: true
@@ -15,6 +16,6 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 app.use(VueGoodTablePlugin)
 app.use(ElementPlus)
-// app.use(https)
+app.use(PrimeVue);
 // app.use(cors(corsOptions))
 app.mount('#app')

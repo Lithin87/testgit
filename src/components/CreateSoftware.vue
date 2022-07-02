@@ -20,9 +20,9 @@
 
     <br><br><br />
 
-    <form id="form1" @submit="onSubmit" style="color: blue">
+    <!-- <form id="form1" @submit="onSubmit" style="color: blue">
       <font :style="{ color: formActiveColor }">
-        FIRST NAME       <input type="text" v-model="form.fname" :disabled="isDisabled" style="color: red" id="fname"/><br />
+        FIRST NAME       <input type="text" v-model="form.fname" :disabled="isDisabled" id="fname"/><br />
         LAST NAME        <input type="text" v-model="form.lname" :disabled="isDisabled" /><br />
         REPAIR DEVICE    <input type="text" v-model="form.device" :disabled="isDisabled" /><br />
         DATE OF DROP     <input type="text" v-model="form.dod" :disabled="isDisabled" /><br />
@@ -32,7 +32,7 @@
 
       <input  type="submit" value="SUBMIT"  @click="isHidden = false"  :disabled="isDisabled"/>
       <input  type="reset"  value="ENTER NEW"  @click="increment"  :disabled="isDisabled"/><br />
-    </form>
+    </form> -->
 
 <br><br><br><br>
 
@@ -44,14 +44,161 @@
        pick-up on {{form.dop}} with Rs {{form.estfund}}
       
     </h1><br> {{articleId}}
-  </div>
+  
+
+    <el-form id="form1" :model="form" :disabled="isDisabled" label-width="210px" size="default" label-position="right" >
+     <el-col :span="8">
+    <el-form-item label="NAME"  >
+      <el-input v-model="form.name" />
+    </el-form-item>
+    <el-form-item label="DEVICE"  >
+      <el-input v-model="form.device" />
+    </el-form-item>
+
+
+    <el-form-item label="PRIORITY">
+      <el-select v-model="form.priority" placeholder="please select your zone">
+        <el-option label="NORMAL" value="normal" />
+        <el-option label="ASAP" value="asap" />
+      </el-select>
+    </el-form-item>
+
+     </el-col>
+     
+    <el-form-item label="DROP DATE">
+      <el-col :span="6">
+        <el-date-picker
+          v-model="form.dropdate"
+          type="date"
+          placeholder="Pick a date"
+          style="width: 100%"
+        />
+      </el-col>
+      <el-col :span="1" class="text-center">
+        <span class="text-gray-500">--</span>
+      </el-col>
+      <el-col :span="6">
+        <el-time-picker
+          v-model="form.dropdate"
+          placeholder="Pick a time"
+          style="width: 100%"
+        />
+      </el-col>
+    </el-form-item>
+
+
+<el-form-item label="PICK DATE">
+      <el-col :span="6">
+        <el-date-picker
+          v-model="form.pickdate"
+          type="date"
+          placeholder="Pick a date"
+          style="width: 100%"
+        />
+      </el-col>
+      <el-col :span="1" class="text-center">
+        <span class="text-gray-500">--</span>
+      </el-col>
+      <el-col :span="6">
+        <el-time-picker
+          v-model="form.pickdate"
+          placeholder="Pick a time"
+          style="width: 100%"
+        />
+      </el-col>
+    </el-form-item>
+
+
+
+
+
+
+
+
+
+<el-row :span="6">
+    <el-form-item label="Estimate Told">
+      <el-switch v-model="form.estsaid" />
+    </el-form-item>
+   <el-form-item label="Estimated Fund"  >
+      <el-input v-model="form.estfund" @keypress="validateNumber"/>
+    </el-form-item>
+</el-row>
+
+    <el-form-item label="Activity type">
+      <el-checkbox-group v-model="form.type">
+        <el-checkbox label="PCB" name="type" />
+        <el-checkbox label="Fuse Replace" name="type" />
+        <el-checkbox label="Revolving Motor" name="type" />
+        <el-checkbox label="Simple" name="type" />
+      </el-checkbox-group>
+    </el-form-item>
+    <el-form-item label="Complexity">
+      <el-radio-group v-model="form.complexity">
+        <el-radio label="Known" />
+        <el-radio label="Research" />
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="Comments">
+      <el-input v-model="form.comments" type="textarea" />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">Create</el-button>
+      <el-button>Cancel</el-button>
+
+      <el-col :span="1" class="text-center">
+        <span class="text-gray-500">--</span>
+      </el-col>
+
+       <div class="demo-progress">
+    <el-progress
+      :percentage="100"
+      :status="status"
+      :indeterminate="indeterminate"
+      :duration="3"
+    />
+ </div>
+    </el-form-item>
+
+
+  </el-form>
+
+ 
+<el-input v-model="input" placeholder="Please input" />
+<InputText type="text" v-model="value5" disabled />
+
+</div>
 </template>
 
+<script  setup>
+import { ref } from 'vue'
+// import { reactive } from 'vue'
 
+// const size = ref('default')
+const input = ref('')
+// do not use same name with ref
+// const form = reactive({
+//   name: '',
+//   region: '',
+//   date1: '',
+//   date2: '',
+//   delivery: false,
+//   type: [],
+//   resource: '',
+//   desc: '',
+// })
+
+// const onSubmit = () => {
+//   console.log('submit!')
+// }
+
+ const value5 = ref('PrimeVue');
+</script>
 
 <script>
 import axios from "axios";
 const host  = "http://localhost:8080";   
+
     
 export default {
     name : "Create_Software",
@@ -64,14 +211,20 @@ export default {
         fontSize : 40,
         isHidden : true,
         isDisabled : false,
-        articleId : "gg",
+        indeterminate : "true",
+        status : "false",
         form : {
-          fname : '',
-          lname : '',
+          id : '',
+          name : '',
+          priority : '',
           device :'',
-          dod : '',
-          dop : '',
-          estfund :''
+          complexity : '',
+          type : [],
+          estfund :'',
+          estsaid : '',
+          comments : '',
+          dropdate: '',
+          pickdate : ''
          }
         }
     },
@@ -84,20 +237,31 @@ export default {
     },
       async onSubmit(e){
                e.preventDefault();
-                if(!this.form.fname || !this.form.device){
-                    alert('Please Add a First Name')
+                if(!this.form.name){
+                    alert('Please Add First Name')
                     return
                 }
-
+                if(!this.form.device){
+                    alert('Please Add Device Name')
+                    return
+                }
                   if(!this.form.estfund ){
-                    alert('Please Add a First Name')
+                    alert('Please Add estimated fund')
                     return
                 }
 
               var req_headers = { headers: { 'Access-Control-Request-Private-Network': 'true',
                                          'Content-Type' : 'application/json'} }
-                     const response = await axios.post(host,{form : this.form },req_headers);
-                this.articleId = response.data
+                 const response1 = await axios.get(host+"/id",req_headers);
+                  
+                     var id = ""+ (response1.data[0]+1);
+                     const response = await axios.post(host,{id ,form : this.form },req_headers);
+                     if(response.data == "POST DONE")
+                       { 
+                        this.indeterminate = "false",
+                        this.status = "success"
+                          document.getElementById("form1").reset()
+                       }
 
             },
 
@@ -133,6 +297,11 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.demo-progress .el-progress--line {
+  margin-bottom: 2px;
+  width: 550px;
 }
 </style>
 
