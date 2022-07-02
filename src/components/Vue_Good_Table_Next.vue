@@ -115,7 +115,7 @@ export default {
      this.rows = response.data;
       
     } catch (e) {
-      this.errors.push(e.message);
+      this.errors.push(e);
        this.isHidden = false;
     }
   },
