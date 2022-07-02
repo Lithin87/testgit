@@ -22,7 +22,7 @@
 <script>
 import axios from "axios";
 // const host  = "http://localhost:8080";  
-const host  ="http://34.93.10.231:8081";
+const host  ="http://34.93.248.195:8080";
 
 export default {
   name: "Vue_Good_Table_Next",
