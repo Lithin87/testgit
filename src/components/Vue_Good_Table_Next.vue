@@ -21,7 +21,7 @@
 
 <script>
 import axios from "axios";
-var host  = "http://"+process.env.IP+"8080";  
+var host  = "http://"+process.env.IP+":8080";  
 // const host  ="http://34.93.248.195:8080";
 
 export default {
