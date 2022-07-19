@@ -21,7 +21,7 @@
 
 <script>
 import axios from "axios";
-const host  = "http://localhost:8080";  
+var host  = "http://localhost:8080";  
 // const host  ="http://34.93.248.195:8080";
 
 export default {
@@ -115,9 +115,9 @@ export default {
                                          'Content-Type' : 'application/json'} }
 // https://api.ipify.org/
 
-    // const response1 = await axios.get("https://api.ipify.org/?format=json");
-    // var df = response1.data.ip;
-    // host = df+":8080";
+    const response1 = await axios.get("https://api.ipify.org/?format=json");
+    var df = response1.data.ip;
+    host = df+":8080";
     //  this.errors.push(df);
      const response = await axios.get(host, req_headers);
       // const response1 = await axios.post(host,{form : {"dfd" : "dftghf"}},{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
