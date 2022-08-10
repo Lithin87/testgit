@@ -113,8 +113,7 @@ export default {
   async created() {
     try {
 
-              var req_headers = { headers: { 'Access-Control-Request-Private-Network': 'true',
-                                         'Content-Type' : 'application/json'} }
+              var req_headers = { headers: {'Content-Type' : 'application/json'} }
 // https://api.ipify.org/
 
     // const response1 = await axios.get("https://api.ipify.org/?format=json");
