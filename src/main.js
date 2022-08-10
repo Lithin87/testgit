@@ -18,4 +18,7 @@ app.use(VueGoodTablePlugin)
 app.use(ElementPlus)
 app.use(PrimeVue);
 // app.use(cors(corsOptions))
+
 app.mount('#app')
+
+

@@ -27,9 +27,10 @@ module.exports = defineConfig({
   transpileDependencies: [
     'vuetify'
   ],
-  // devServer: {
-  //   proxy: 'http://localhost/'
+  devServer: {
+    proxy: 'http://localhost/',
+    allowedHosts: 'all' 
 
-  // }
+  }
 
 })

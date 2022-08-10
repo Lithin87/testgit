@@ -21,8 +21,10 @@
 
 <script>
 import axios from "axios";
-var host  = "http://"+process.env.IP+":8080";  
+// var host  = "http://"+process.env.IP+":8080"; 
 // const host  ="http://34.93.248.195:8080";
+var host  = "https://backend-kzgmyi7nmq-uc.a.run.app";
+
 
 export default {
   name: "Vue_Good_Table_Next",
