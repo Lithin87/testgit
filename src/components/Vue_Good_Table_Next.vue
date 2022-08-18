@@ -1,22 +1,31 @@
 <template>
   <div>
     <vue-good-table
-    :columns="columns" :rows="rows"  max-height="300px" fixed-header="true" line-numbers="true"  :select-options="{
+    :columns="columns" :rows="rows"  max-height="300px" fixed-header="true" line-numbers="true"   @on-selected-rows-change="selectionChanged" 
+    
+    :select-options="{
     enabled: true,
     selectOnCheckboxOnly: true, // only select when checkbox is clicked instead of the row
     selectionInfoClass: 'custom-class',
     selectionText: 'rows selected',
     clearSelectionText: 'clear',
-    disableSelectInfo: true, // disable the select info panel on top
+    disableSelectInfo: false, // disable the select info panel on top
     selectAllByGroup: true, // when used in combination with a grouped table, add a checkbox in the header row to check/uncheck the entire group
   }"
-   :search-options="{enabled: true, placeholder: 'Search this table Jobin' }" theme="black-rhino"/>
-      <!-- <template #table-actions-bottom>
-        This will show up on the bottom of the table.
-      </template> -->
-    <!-- </vue-good-table> -->
+    :search-options="{enabled: true, placeholder: 'Search this table Jobin' }" theme="black-rhino">
+    
+    <div >
+    <button>Action 1</button>
   </div>
-<h1 style="color: red" :hidden="isHidden"> {{this.errors}} </h1> 
+  
+      <template #table-actions-bottom>
+       <h5 style="color: red" :hidden="isHidden"> {{this.errors}} </h5> 
+      </template> 
+    </vue-good-table>
+
+
+  </div>
+
 </template>
 
 <script>
@@ -107,27 +116,25 @@ export default {
       ],
       rows: [],
       errors: [],
-      isHidden : false,
+      isHidden : true,
     };
   },
   async created() {
     try {
-
-              var req_headers = { headers: {'Content-Type' : 'application/json'} }
-// https://api.ipify.org/
-
-    // const response1 = await axios.get("https://api.ipify.org/?format=json");
-    // var df = response1.data.ip;
-    // host = df+":8080";
-    //  this.errors.push(df);
-     const response = await axios.get(host, req_headers);
-      // const response1 = await axios.post(host,{form : {"dfd" : "dftghf"}},{ headers: { 'Access-Control-Request-Private-Network': 'true'}});
-     this.rows = response.data;
-      
+      var req_headers = { headers: {'Content-Type' : 'application/json'} }
+      const response = await axios.get(host, req_headers);
+      this.rows = response.data;
+     
     } catch (e) {
       this.errors.push(e);
        this.isHidden = false;
     }
   },
+  methods: {
+        onRowClick(params) {
+                 this.errors.push("GGG"+params);
+          }
+
+  }
 };
 </script>

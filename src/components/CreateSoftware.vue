@@ -2,7 +2,7 @@
   <div class="hello">
     <div style="text-align: center">
       <h1 style="color: rgba(102, 91, 199, 0.685)">
-        LIBIN'S SOFTWARE DEVELOP SHOP
+        JOBIN'S SOFTWARE DEVELOP SHOP
       </h1>
     </div>
 
@@ -19,20 +19,6 @@
     <button  @click=" open ='CLOSED.SEE YOU TOMORROW'; isDisabled =true; activeColor ='red'; formActiveColor = 'red';"  style="color:red">CLOSE</button>
 
     <br><br><br />
-
-    <!-- <form id="form1" @submit="onSubmit" style="color: blue">
-      <font :style="{ color: formActiveColor }">
-        FIRST NAME       <input type="text" v-model="form.fname" :disabled="isDisabled" id="fname"/><br />
-        LAST NAME        <input type="text" v-model="form.lname" :disabled="isDisabled" /><br />
-        REPAIR DEVICE    <input type="text" v-model="form.device" :disabled="isDisabled" /><br />
-        DATE OF DROP     <input type="text" v-model="form.dod" :disabled="isDisabled" /><br />
-        DATE OF PICKUP   <input type="text" v-model="form.dop" :disabled="isDisabled" /><br />
-        ESTIMATED FUND   <input type="text" v-model="form.estfund" :disabled="isDisabled" @keypress="validateNumber"/><br />
-      </font>
-
-      <input  type="submit" value="SUBMIT"  @click="isHidden = false"  :disabled="isDisabled"/>
-      <input  type="reset"  value="ENTER NEW"  @click="increment"  :disabled="isDisabled"/><br />
-    </form> -->
 
 <br><br><br><br>
 
@@ -252,12 +238,12 @@ export default {
                     return
                 }
 
-              var req_headers = { headers: { 'Access-Control-Request-Private-Network': 'true',
-                                         'Content-Type' : 'application/json'} }
+              var req_headers = {headers: {'Content-Type' : 'application/json'} }
                  const response1 = await axios.get(host+"/id",req_headers);
                   
                      var id = ""+ (response1.data[0]+1);
                      const response = await axios.post(host,{id ,form : this.form },req_headers);
+                   
                      if(response.data == "POST DONE")
                        { 
                         this.indeterminate = "false",
@@ -306,11 +292,3 @@ a {
   width: 550px;
 }
 </style>
-
-
-<!-- async created() {
-  // POST request using axios with async/await
-  const article = { title: "Vue POST Request Example" };
-  const response = await axios.post("https://reqres.in/api/articles", article);
-  this.articleId = response.data.id;
-} -->
