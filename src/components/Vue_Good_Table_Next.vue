@@ -132,7 +132,7 @@ export default {
   },
   methods: {
         onRowClick(params) {
-                 this.errors.push("GGG"+params);
+                 this.errors.push("GGG11"+params);
           }
 
   }
